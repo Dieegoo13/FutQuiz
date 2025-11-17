@@ -2,10 +2,16 @@
 
 class Action
 {
-    protected $layout = 'default'; 
+    protected $layout = 'default';
+    protected $db;
+
+    public function __construct() {
+        $this->db = Database::getConnection();
+    }
+
 
     protected function render($view, $layout = true, $data = [])
-    {   
+    {
 
         extract($data);
 
@@ -17,31 +23,32 @@ class Action
 
         ob_start();
         require_once $viewPath;
-        $content = ob_get_clean();
+        $conteudo = ob_get_clean();
 
         // se $layout for false, mostra só o conteúdo
         if ($layout === false) {
-            echo $content;
+            echo $conteudo;
             return;
         }
 
-        //  FALTANDO: O código do layout não está sendo executado!
-        $layoutFile = $viewPath . '/layouts/' . $this->layout . '.phtml';
+
+        $layoutFile = __DIR__ . '/../views/layouts/' . $this->layout . '.phtml';
 
         if (file_exists($layoutFile)) {
             include $layoutFile;
         } else {
-            echo $content;
+            echo $conteudo;
         }
-    
     }
 
-    protected function redirect($path){
+    protected function redirect($path)
+    {
         header('Location: ' . BASE_URL . ltrim($path, '/'));
         exit;
     }
 
-    protected function json($data){
+    protected function json($data)
+    {
         http_response_code(200);
 
         header('Content-Type: application/json');
@@ -51,9 +58,76 @@ class Action
 
 
     //TO DO FAZER AUTENTICAÇÕES 
+    protected function isLogged()
+    {
 
+        return isset($_SESSION['user_id']);
+    }
 
-    //TO DO VALIDAR EMAILS E LOGINS
+    protected function requireAuth()
+    {
 
-    //TO DO SANITIZAR INPUTS
+        if ($this->isLogged()) {
+            $this->redirect('/');
+        }
+    }
+
+    protected function sanitize($data)
+    {
+        if (is_array($data)) {
+            return array_map([$this, 'sanitize'], $data);
+        }
+        return htmlspecialchars(strip_tags(trim($data)), ENT_QUOTES, 'UTF-8');
+    }
+
+    protected function validateEmail($email)
+    {
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+
+    /**
+     * Formata tempo em minutos e segundos
+     */
+    protected function formatTime($seconds)
+    {
+        $minutes = floor($seconds / 60);
+        $secs = $seconds % 60;
+        return sprintf("%02d:%02d", $minutes, $secs);
+    }
+
+    /**
+     * Mensagem de sucesso na sessão
+     */
+    protected function setSuccess($message)
+    {
+        $_SESSION['flash_success'] = $message;
+    }
+
+    /**
+     * Mensagem de erro na sessão
+     */
+    protected function setError($message)
+    {
+        $_SESSION['flash_error'] = $message;
+    }
+
+    /**
+     * Pega e limpa mensagem de sucesso
+     */
+    protected function getSuccess()
+    {
+        $message = $_SESSION['flash_success'] ?? null;
+        unset($_SESSION['flash_success']);
+        return $message;
+    }
+
+    /**
+     * Pega e limpa mensagem de erro
+     */
+    protected function getError()
+    {
+        $message = $_SESSION['flash_error'] ?? null;
+        unset($_SESSION['flash_error']);
+        return $message;
+    }
 }

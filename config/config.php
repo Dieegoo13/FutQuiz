@@ -6,7 +6,7 @@ define('DB_PASS', '');
 
 // Configurações da aplicação
 define('APP_NAME', 'QuizFut');
-define('BASE_URL', 'http://seusite.com/');
+define('BASE_URL', 'http://localhost:8080/');
 define('APP_ROOT', dirname(__DIR__));
 
 // Configurações de sessão

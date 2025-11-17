@@ -21,6 +21,7 @@ class Autoloader
             __DIR__ . '/../controllers/', 
             __DIR__ . '/../models/', 
             __DIR__ . '/../core/',
+            __DIR__ . '/../services/'
         ];
 
         // Registra o método 'load' para autocarregar classes

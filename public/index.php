@@ -11,3 +11,7 @@ Autoloader::init();
 // Inicia o roteador
 require_once __DIR__ . '/../app/core/Router.php';
 $router = new Router();
+
+// echo '<pre>';
+// print_r($_REQUEST);
+// echo '</pre>';

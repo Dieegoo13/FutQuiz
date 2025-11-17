@@ -1,0 +1,29 @@
+/* 
+ESTILO GLOBAIS
+*/
+
+/* MENSAGENS GLOBAIS  */
+.msg-erro, .msg-sucesso {
+    padding: 12px;
+    margin: 0 0 15px 0;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    animation: fadeIn .3s ease-in-out;
+}
+
+.msg-erro {
+    background: #ff4d4d;
+    color: #fff;
+    border-left: 6px solid #b30000;
+}
+
+.msg-sucesso {
+    background: #28a745;
+    color: #fff;
+    border-left: 6px solid #155724;
+}
+
+/* 
+=================================================================================
+*/

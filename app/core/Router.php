@@ -17,8 +17,13 @@ class Router
     {
         $this->routes = [
             '/' => [
-                'controller' => 'UsuarioController',
+                'controller' => 'LoginController',
                 'action' => 'login'
+            ],
+
+            '/logout' => [
+                'controller' => 'LoginController',
+                'action' => 'logout'
             ],
 
             '/cadastro' => [

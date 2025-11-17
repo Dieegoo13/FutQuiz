@@ -1,0 +1,152 @@
+
+.usuario-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.perfil {
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    background-color: #fff;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.perfil img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.links-container {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Estilo base dos botões */
+.links-container a {
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    width: 150px;
+    display: inline-block;
+    text-align: center;
+    transition: 0.3s;
+}
+
+/*  Jogar - Azul */
+.btn-jogar { background-color: #0066ff; }
+.btn-jogar:hover { background-color: #1a7bff; }
+
+/* Ranking - Roxo */
+.btn-ranking { background-color: #8000ff; }
+.btn-ranking:hover { background-color: #9c33ff; }
+
+/* Sair - Vermelho */
+.btn-sair { background-color: #d40000; }
+.btn-sair:hover { background-color: #ff1a1a; }
+
+/*  Editar Cadastro - Amarelo */
+.btn-editar {
+    cursor: pointer;
+    background-color: #e6b800;
+    color: #000;
+}
+.btn-editar:hover { background-color: #ffcc00; }
+
+.container input {
+    background-color: #fff;
+    width: 70%;
+    padding: 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 6px;
+}
+
+hr {
+    width: 80%;
+    border: 1px solid #CDFFDC;
+    margin: 20px 0;
+}
+
+/* --- Modal --- */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* garante que vai ficar acima de tudo */
+}
+
+.modal-content {
+    position: relative;
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 12px;
+    width: 350px;
+    color: #222;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    animation: modalFade .25s ease;
+}
+
+/* animação suave */
+@keyframes modalFade {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-content h3 {
+    margin-top: 0;
+}
+
+/* Inputs do modal */
+.modal-content input {
+    width: 90%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    font-size: 15px;
+}
+
+/* Botão salvar */
+.modal-close {
+    background-color: #006400;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    width: 100%;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 12px;
+    font-weight: bold;
+}
+.modal-close:hover { background-color: #008000; }
+
+/* Botão X fechar */
+.modal-close-x {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #444;
+    transition: .3s;
+}
+.modal-close-x:hover { color: #000; }

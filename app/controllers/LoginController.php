@@ -2,7 +2,6 @@
 
 class LoginController extends Action
 {
-
     public function login()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -10,11 +9,15 @@ class LoginController extends Action
             $email = $_POST['email'] ?? '';
             $senha = $_POST['senha'] ?? '';
 
-            $usuarioModel = new Usuario();
-            $usuario = $usuarioModel->findByEmail($email);
+            if (!LoginService::validarDados($email, $senha)) {
+                MessageService::setError("Dados inválidos! Preencha os campos corretamente.");
+                return $this->redirect('/');
+            }
 
-            if (!$usuario || !password_verify($senha, $usuario['senha'])) {
-                MessageService::setError("email ou senha inválidos.");
+            $usuario = LoginService::validarUsuario($email, $senha);
+
+            if (!$usuario) {
+                MessageService::setError("E-mail ou senha incorretos!");
                 return $this->redirect('/');
             }
 
@@ -24,7 +27,12 @@ class LoginController extends Action
         }
 
         $erro = MessageService::getError();
-        $this->render('login/login', false, compact('erro'));
+
+        $this->render('login/login', false, [
+            'titulo' => 'Login',
+            'estilos' => ['login.css'],
+            'erro' => $erro
+        ]);
     }
 
     public function logout()
@@ -32,5 +40,4 @@ class LoginController extends Action
         session_destroy();
         $this->redirect('/');
     }
-
 }

@@ -1,7 +1,5 @@
 <?php
 
-namespace app\services;
-
 class TokenService
 {
     public static function generate()

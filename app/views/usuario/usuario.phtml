@@ -1,0 +1,49 @@
+<div class="usuario-container">
+
+    <div class="perfil">
+        <img src="https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png" alt="Foto de perfil">
+    </div>
+
+    <p>Olá, seja bem-vindo <strong><?= $usuario['nome'] ?? '[USER]' ?></strong></p>
+
+    <input type="text" value="<?= $usuario['nome'] ?? 'Usuário Exemplo' ?>" disabled>
+    <input type="email" value="<?= $usuario['email'] ?? 'email@exemplo.com' ?>" disabled>
+    <input type="text" value="<?= $usuario['login'] ?? 'LoginExemplo' ?>" disabled>
+    <input type="password" value="******" disabled>
+
+    <hr>
+
+    <p>Sua pontuação atual: <strong><?= $usuario['pontuacao'] ?? '500' ?> pontos</strong></p>
+    <p>Ranking atual: <strong><?= $usuario['ranking'] ?? '1°' ?></strong></p>
+
+    <div class="links-container">
+        <a href="/quiz" class="btn-jogar">Jogar</a>
+        <a href="/ranking" class="btn-ranking">Ver Ranking</a>
+        <a class="btn-editar">✏ Editar Cadastro</a>
+        <a href="/logout" class="btn-sair">Sair</a>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal" id="editModal">
+    <div class="modal-content">
+
+        <span class="modal-close-x" onclick="closeModal()">⨉</span>
+
+        <h3>Editar Cadastro</h3>
+
+        <form action="/usuario/atualizar" method="POST">
+            <input type="text" name="nome" placeholder="Nome" required>
+            <input type="text" name="login" placeholder="Login" required>
+            <input type="password" name="senha" placeholder="Senha" required>
+
+            <button type="submit" class="modal-close">Salvar</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+<script src="/js/main.js"></script>

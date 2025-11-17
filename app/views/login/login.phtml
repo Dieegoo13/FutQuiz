@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FutQuiz - Login</title>
+    <title><?= $titulo ?? 'FutQuiz - Login' ?></title>
 
-    <link rel="stylesheet" href="/css/style.css">
+    <!-- Estilos exclusivos desta página -->
     <link rel="stylesheet" href="/css/login.css">
 </head>
 
@@ -19,7 +19,7 @@
         </div>
 
         <?php if (!empty($erro)): ?>
-            <div class="msg-erro"><?= $erro ?></div>
+            <div class="msg-erro"><?= htmlspecialchars($erro) ?></div>
         <?php endif; ?>
 
         <form action="" method="POST">
@@ -33,5 +33,4 @@
     </div>
 
 </body>
-
 </html>

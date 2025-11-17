@@ -49,7 +49,13 @@ class Router
             '/ranking' => [
                 'controller' => 'RankingController',
                 'action' => 'ranking'
+            ],
+
+            '/registrar' => [
+                'controller' => 'UsuarioController',
+                'action' => 'registrar'
             ]
+            
         ];
     }
 

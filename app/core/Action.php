@@ -57,7 +57,6 @@ class Action
     }
 
 
-    //TO DO FAZER AUTENTICAÇÕES 
     protected function isLogged()
     {
 

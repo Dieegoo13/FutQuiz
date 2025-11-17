@@ -1,7 +1,5 @@
 <?php
 
-use Database;
-
 class Usuario
 {
 
@@ -12,6 +10,31 @@ class Usuario
     {
         $this->db = Database::getConnection();
     }
+
+    public function criarUsuario($nome, $email, $senha)
+    {
+        $query = "INSERT INTO {$this->table} (nome_usuario, email, senha, token_login) 
+                VALUES (:nome_usuario, :email, :senha, :token_login)";
+
+        try {
+            $stmt = $this->db->prepare($query);
+            $hashedPassword = password_hash($senha, PASSWORD_DEFAULT);
+            $token = TokenService::generate(); 
+
+            $stmt->execute([
+                ':nome_usuario' => $nome,
+                ':email' => $email,
+                ':senha' => $hashedPassword,
+                ':token_login' => $token
+            ]);
+
+            return true;
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+            exit;
+        }
+    }
+
 
     public function findByEmail($email)
     {
@@ -24,7 +47,8 @@ class Usuario
             $stmt->execute([':email' => $email]);
             return $stmt->fetch();
         } catch (\PDOException $e) {
-            return false;
+            echo $e->getMessage();
+            exit;
         }
     }
 }

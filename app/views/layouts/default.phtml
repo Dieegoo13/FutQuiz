@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $titulo ?? 'FutQuiz' ?></title>
-    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>css/default.css">
+
+    <?php if (!empty($estilos) && is_array($estilos)): ?>
+        <?php foreach ($estilos as $css): ?>
+            <link rel="stylesheet" href="<?= BASE_URL . 'css/' . $css ?>">
+        <?php endforeach; ?>
+    <?php endif; ?>
 </head>
+
 <body>
 
-    <div class="container">
+    <main class="container">
         <?= $conteudo ?? '' ?>
-    </div>
+    </main>
 
 </body>
+
 </html>

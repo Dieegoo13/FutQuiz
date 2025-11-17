@@ -1,7 +1,12 @@
 /* 
 ESTILO GLOBAIS
-*/
 
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 /* MENSAGENS GLOBAIS  */
 .msg-erro, .msg-sucesso {
     padding: 12px;

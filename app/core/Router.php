@@ -54,7 +54,12 @@ class Router
             '/registrar' => [
                 'controller' => 'UsuarioController',
                 'action' => 'registrar'
-            ]
+            ],
+
+            '/atualizar' => [
+                'controller' => 'UsuarioController',
+                'action' => 'atualizar'
+            ],
             
         ];
     }

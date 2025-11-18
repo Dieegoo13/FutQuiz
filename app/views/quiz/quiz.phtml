@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FutQuiz</title>
+    <link rel="stylesheet" href="/css/quiz.css">
+</head>
+
+<body>
+
+    <header>
+        <a href="/usuario"><img src="/img/logo.png" alt="FutQuiz Logo"></a>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/usuario">Usuário</a>
+            <a href="/ranking">Ranking</a>
+            <a href="/logout">Sair</a>
+        </nav>
+    </header>
+
+    <main class="container">
+
+        <div class="infos">
+            <h3>Pontuação: <strong id="pontuacao">0</strong></h3>
+            <h3>Tempo: <strong id="tempo">15</strong>s</h3>
+        </div>
+
+        <div class="pergunta">
+            <p><strong id="contador">1/10</strong></p>
+            <p><strong>Pergunta:</strong> <span id="texto-pergunta"></span></p>
+        </div>
+
+        <div class="opcoes">
+            <button class="opcao" data-op="A"></button>
+            <button class="opcao" data-op="B"></button>
+            <button class="opcao" data-op="C"></button>
+            <button class="opcao" data-op="D"></button>
+        </div>
+
+    </main>
+
+
+    <footer class="rodape">
+        <div class="info-footer">
+            <p>FutQuiz &copy; <?php echo date('Y'); ?> - Todos os direitos reservados</p>
+            <p>Desenvolvido por <strong>Diego</strong> </p>
+        </div>
+    </footer>
+</body>
+    <script src="/js/quiz.js"></script>
+</html>

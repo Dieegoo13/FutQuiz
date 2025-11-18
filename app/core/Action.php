@@ -66,7 +66,7 @@ class Action
     protected function requireAuth()
     {
 
-        if ($this->isLogged()) {
+        if (!$this->isLogged()) {
             $this->redirect('/');
         }
     }

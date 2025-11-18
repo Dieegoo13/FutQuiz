@@ -3,7 +3,6 @@ class QuizController extends Action{
     
     public function quiz() {
         $this->render('quiz/quiz', false);
-        echo "<h1>Página de Quiz</h1>";
     }
 
     public function resultado() {

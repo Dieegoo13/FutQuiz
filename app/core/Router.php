@@ -60,7 +60,10 @@ class Router
                 'controller' => 'UsuarioController',
                 'action' => 'atualizar'
             ],
-            
+                '/api/perguntas' => [
+                'controller' => 'QuizController',
+                'action' => 'apiPerguntas'
+            ],
         ];
     }
 

@@ -1,0 +1,28 @@
+<div class="topo">
+    <a href="/usuario"><img src="/img/logo.png" alt="Logo do Sistema"></a>
+    <h1>Ranking TOP 5</h1>
+</div>
+
+<div class="informacao">
+    <?php if (!empty($top5)): ?>
+
+        <?php $posicao = 1;
+        foreach ($top5 as $user): ?>
+            <p><?= $posicao ?>° <?= htmlspecialchars($user['nome_usuario']) ?> —
+                <strong><?= $user['pontos_totais'] ?> pontos</strong>
+            </p>
+        <?php
+            $posicao++;
+        endforeach;
+        ?>
+
+    <?php else: ?>
+        <p>Nenhum usuário no ranking no momento.</p>
+    <?php endif; ?>
+</div>
+
+<div class="botoes">
+    <a href="/quiz">JOGAR</a>
+    <a href="/ranking">Ranking</a>
+    <a href="/usuario">Perfil</a>
+</div>

@@ -91,4 +91,30 @@ class Usuario
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    public function atualizarPontuacao($id, $pontosGanhos){
+
+        $query = "UPDATE {$this->table} 
+                    SET pontos_totais = pontos_totais + :pontos
+                    WHERE id = :id";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindValue(":pontos", $pontosGanhos, PDO::PARAM_INT);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+                    
+    }
+
+    public function topCinco(){
+
+        $query = "SELECT nome_usuario, pontos_totais
+                FROM {$this->table} 
+                ORDER BY pontos_totais DESC
+                LIMIT 5";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);        
+
+    }
 }

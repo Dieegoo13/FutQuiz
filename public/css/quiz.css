@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -9,22 +15,70 @@ body {
     height: 100vh;
 }
 
+/* ===== HEADER ===== */
 header {
     width: 100%;
-    padding: 30px;
     background-color: #006400;
+    padding: 10px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+header img {
+    transition: transform .2s;
+}
+
+header img:hover {
+    transform: scale(1.05);
 }
 
 header nav a {
     color: #fff;
-    margin-left: 15px;
+    margin-left: 3rem;
     text-decoration: none;
     font-weight: bold;
+    transition: 0.25s;
 }
+
+header nav a:hover {
+    color: #ADFFB0;
+    text-shadow: 0 0 6px rgba(255,255,255,0.4);
+}
+
+/* ===== PERFIL ===== */
+.perfil {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.perfil img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid #ADFFB0;
+    object-fit: cover;
+    transition: .25s;
+}
+
+.perfil img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.nome-user {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+/* ===== CONTAINER ===== */
 .container {
     display: flex;
     flex-direction: column;
@@ -34,10 +88,10 @@ header nav a {
     border-radius: 12px;
     width: 70%;
     height: 65%;
-    color: #fff;
     margin-top: 20px;
 }
 
+/* ===== INFORMAÇÕES ===== */
 .infos {
     width: 70%;
     display: flex;
@@ -48,25 +102,32 @@ header nav a {
 .infos h3 {
     color: #000;
     margin: 8px 0;
+    font-size: 20px;
 }
 
-/* ⬇ Área da pergunta ajustada */
+/* ===== PERGUNTA ===== */
 .pergunta {
     text-align: start;
     color: #000;
-    padding: 20px;
+    padding: 25px;
     width: 60%;
     border-radius: 12px;
     background-color: #fff;
     border: 2px solid #009933;
-    box-shadow: 0 0 10px rgba(0, 128, 0, 0.4);
+    box-shadow: 0 0 12px rgba(0, 128, 0, 0.4);
+    transition: .3s;
+}
+
+.pergunta:hover {
+    transform: scale(1.01);
 }
 
 .pergunta p {
     margin: 8px 0;
+    font-size: 18px;
 }
 
-/* ⬇ Opções sem fundo, apenas borda verde */
+/* ===== OPÇÕES ===== */
 .opcoes {
     width: 60%;
     margin-top: 15px;
@@ -74,30 +135,62 @@ header nav a {
 
 .opcao {
     width: 100%;
-    display: block;
-    padding: 12px;
+    padding: 15px;
     text-align: start;
     border-radius: 14px;
-    background-color: transparent;
-    border: 2px solid #009933;
     background-color: #fff;
+    border: 2px solid #009933;
     cursor: pointer;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     font-weight: bold;
+    font-size: 16px;
     transition: 0.25s;
 }
 
 .opcao:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 8px rgba(0, 128, 0, 0.5);
+    transform: translateX(6px);
+    background-color: #eaffea;
+    border-color: #00cc44;
+    box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
 }
 
-.rodape{
+.opcao.correto {
+    background-color: #4CAF50 !important;
+    color: white;
+}
+
+.opcao.errado {
+    background-color: #E53935 !important;
+    color: white;
+}
+
+/* ===== RODAPÉ ===== */
+.rodape {
+    margin-top: auto;
     text-align: center;
     width: 100%;
-    padding: 30px;
+    padding: 20px;
     background-color: #006400;
-    display: flex;
-    justify-content: center;
     color: #fff;
+    font-size: 14px;
+    letter-spacing: .5px;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+}
+
+.info-footer p {
+    margin: 2px 0;
+}
+
+.info-footer a{
+    color: #ADFFB0;
+    text-decoration: none;
+}
+
+.info-footer a:hover{
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.info-footer strong {
+    color: #ADFFB0;
 }

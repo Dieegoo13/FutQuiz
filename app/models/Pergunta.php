@@ -14,7 +14,7 @@ class Pergunta
 
     public function sortearPerguntas($limite = 10){
             
-        $query = "SELECT id, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d
+        $query = "SELECT id, enunciado, alternativa_a, alternativa_b, alternativa_c, alternativa_d, resposta_correta
                 FROM {$this->table}
                 ORDER BY RAND()
                 LIMIT :limite";

@@ -2,8 +2,17 @@
 class RankingController extends Action{
     
     public function ranking() {
-        $this->render('ranking/ranking', false);
-        echo "<h1>Página de ranking</h1>";
+
+        $usuario = new Usuario();
+        $top5 = $usuario->topCinco();
+
+
+        $this->render('ranking/ranking', true,[
+            "titulo" => "Ranking",
+            "estilos" => ["ranking.css"],
+            "top5" => $top5
+        ]);
+
     }
 
 }

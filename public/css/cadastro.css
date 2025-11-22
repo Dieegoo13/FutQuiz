@@ -70,11 +70,13 @@ form input[type="submit"]:hover {
     transform: scale(1.03);
 }
 
+
 @media (max-width: 850px) {
     .container {
         flex-direction: column-reverse;
         height: auto;
         width: 90%;
+        padding: 10px;
     }
 
     .logo,

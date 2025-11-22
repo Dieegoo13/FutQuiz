@@ -6,8 +6,8 @@ class LoginController extends Action
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $email = $_POST['email'] ?? '';
-            $senha = $_POST['senha'] ?? '';
+            $this->sanitize($email = $_POST['email'] ?? '');
+            $this->sanitize($senha = $_POST['senha'] ?? '');
 
             if (!LoginService::validarDados($email, $senha)) {
                 MessageService::setError("Dados inválidos! Preencha os campos corretamente.");

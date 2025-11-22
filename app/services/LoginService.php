@@ -34,5 +34,14 @@ class LoginService
 
         return $usuario;
     }
-}
 
+    public static function validarSenha($senha, $confirm)
+    {
+        if ($senha !== $confirm) {
+            MessageService::setError("As senhas devem ser iguais.");
+            return false;
+        }
+
+        return true;
+    }
+}

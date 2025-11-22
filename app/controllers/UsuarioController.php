@@ -1,23 +1,76 @@
 <?php
-class UsuarioController extends Action{
-
-    public function cadastro() {
-
-        $erro = MessageService::getError();
-
-        $this->render('cadastro/cadastro', true, [
-            'titulo'=>'Cadastra-se',
-            'estilos' => ['cadastro.css'],
-            'erro' => $erro
-        ]);
-    }
-
-    public function usuario()
+class UsuarioController extends Action
+{
+    // ============================
+    //  CADASTRO (exibe página)
+    // ============================
+   public function cadastro()
     {
         $erro = MessageService::getError();
+        $sucesso = MessageService::getSuccess();
 
-        $this->requireAuth(); // protege a rota
-        
+        // Determina o tipo
+        $feedback = $erro ?: $sucesso;
+        $tipo = $erro ? "erro" : ($sucesso ? "success" : "");
+
+        $this->render('cadastro/cadastro', true, [
+            'titulo' => 'Cadastra-se',
+            'estilos' => ['cadastro.css'],
+            'feedback' => $feedback,
+            'tipo' => $tipo
+        ]);
+    }
+    // ============================
+    //  REGISTRAR (POST)
+    // ============================
+    public function registrar()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return $this->redirect('/cadastro');
+        }
+
+        $nome = $this->sanitize($_POST['nome'] ?? '');
+        $email = $this->sanitize($_POST['email'] ?? '');
+        $senha = $this->sanitize($_POST['senha'] ?? '');
+        $confirm = $this->sanitize($_POST['confirm'] ?? '');
+
+        $usuario = new Usuario();
+
+        // 1 — Validar senha
+        if (!LoginService::validarSenha($senha, $confirm)) {
+            return $this->redirect('/cadastro');
+        }
+
+        // 2 — Verificar email duplicado
+        if ($usuario->findByEmail($email)) {
+            MessageService::setError("E-mail já cadastrado!");
+            return $this->redirect('/cadastro');
+        }
+
+        // 3 — Criar usuário
+        if ($usuario->criarUsuario($nome, $email, $senha)) {
+            MessageService::setSuccess("Conta criada com sucesso!");
+            return $this->redirect('/');
+        }
+
+        // 4 — Erro genérico
+        MessageService::setError("Erro ao criar conta. Tente novamente!");
+        return $this->redirect('/cadastro');
+    }
+
+    // ============================
+    //  PERFIL USUÁRIO
+    // ============================
+    public function usuario()
+    {
+        $this->requireAuth();
+
+        $erro = MessageService::getError();
+        $sucesso = MessageService::getSuccess();
+
+        $feedback = $erro ?: $sucesso;
+        $tipo = $erro ? "erro" : ($sucesso ? "sucesso" : "");
+
         $usuarioModel = new Usuario();
         $usuario = $usuarioModel->findById($_SESSION['user_id']);
 
@@ -25,89 +78,45 @@ class UsuarioController extends Action{
             'titulo' => 'Usuário',
             'estilos' => ['usuario.css'],
             'usuario' => $usuario,
-            'erro' => $erro
+            'feedback' => $feedback,
+            'tipo' => $tipo
         ]);
     }
 
-    public function registrar(){
-
-        $erro = MessageService::getError();
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
-            $nome = $_POST['nome'];
-            $email = $_POST['email'];
-            $senha = $_POST['senha'];
-            $confirm = $_POST['confirm'];
-
-            $usuario = new Usuario();
-
-            if($senha !== $confirm){
-                $_SESSION['flash'] = "As senha devem ser iguais!";
-                return $this->redirect('/cadastro');
-            }
-
-            if ($usuario->findByEmail($email)) {
-                $_SESSION['flash_error'] = "Email já cadastrado!";
-                return $this->redirect('/cadastro');
-            }
-
-            if ($usuario->criarUsuario($nome, $email, $senha)) {
-                
-                $_SESSION['flash_success'] = "Conta Criada com sucesso!";
-                return $this->redirect('/');
-            }
-
-            $_SESSION['flash_error'] = "Erro ao criar conta, tente novamente!";
-            return $this->redirect('/cadastro');
-        }
-            
-
-        $this->render('cadastro/cadastro', true, [
-            'titulo'=>'Cadastra-se',
-            'estilos' => ['cadastro.css']
-            
-        ]);
-    }
-
-    public function atualizar(){
-
-        session_start();
-
-        $erro = MessageService::getError();
-
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: /");
-            exit;
-        }
+    // ============================
+    //  ATUALIZAR PERFIL
+    // ============================
+    public function atualizar()
+    {
+        $this->requireAuth();
 
         $usuario = new Usuario();
-
         $id = $_SESSION['user_id'];
-        $nome = $_POST['nome'] ?? '';
+
+        $nome = trim($_POST['nome'] ?? '');
         $senha = $_POST['senha'] ?? '';
         $confirm = $_POST['confirm'] ?? '';
 
+        // Alterar só o nome
         if ($senha === '') {
             $usuario->atualizarNome($id, $nome);
-            $_SESSION['sucesso'] = "Dados atualizados com sucesso!";
-            header("Location: /usuario");
-            exit;
+            MessageService::setSuccess("Dados atualizados com sucesso!");
+            return $this->redirect('/usuario');
         }
 
+        // Validar senha
         if ($senha !== $confirm) {
-            $_SESSION['erro'] = "As senhas não conferem!";
-            header("Location: /usuario");
-            exit;
+            MessageService::setError("As senhas não conferem!");
+            return $this->redirect('/usuario');
         }
+        
 
+        // Atualiza tudo
         $hash = password_hash($senha, PASSWORD_DEFAULT);
-
         $usuario->atualizarSenha($id, $hash);
         $usuario->atualizarNome($id, $nome);
 
-        $_SESSION['sucesso'] = "Dados atualizados com sucesso!";
-        header("Location: /usuario");
-
+        MessageService::setSuccess("Dados atualizados com sucesso!");
+        return $this->redirect('/usuario');
     }
 }

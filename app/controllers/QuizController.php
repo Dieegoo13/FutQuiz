@@ -35,7 +35,8 @@ class QuizController extends Action
     }
 
 
-    public function resultado() {
+    public function resultado()
+    {
 
         $this->requireAuth();
 
@@ -53,7 +54,7 @@ class QuizController extends Action
             $dadosUsuario = $usuario->findById($_SESSION['user_id']);
             $pontuacaoAtual = $dadosUsuario['pontuacao'] ?? 0;
 
- 
+
             $usuario->atualizarPontuacao($_SESSION['user_id'], $pontosGanhos);
 
             $_SESSION['resultado_final'] = [
@@ -82,5 +83,4 @@ class QuizController extends Action
             "titulo" => "Resultado"
         ]);
     }
-
 }

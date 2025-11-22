@@ -24,7 +24,7 @@ ESTILO GLOBAIS
 }
 
 .msg-sucesso {
-    background: #28a745;
+    background: rgb(0, 81, 255);
     color: #fff;
     border-left: 6px solid #155724;
 }

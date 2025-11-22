@@ -2,8 +2,9 @@
 .usuario-container{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
+    gap: 0.5rem;
 }
 
 .perfil {
@@ -38,7 +39,6 @@
     text-decoration: none;
     color: #fff;
     font-weight: bold;
-    width: 150px;
     display: inline-block;
     text-align: center;
     transition: 0.3s;
@@ -150,3 +150,4 @@ hr {
     transition: .3s;
 }
 .modal-close-x:hover { color: #000; }
+

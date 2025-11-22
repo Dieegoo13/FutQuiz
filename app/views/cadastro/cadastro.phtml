@@ -8,8 +8,8 @@
     <input type="password" name="confirm" placeholder="Confirme sua senha" required>
     <input type="submit" value="Criar Conta">
 
-    <?php if (!empty($_SESSION['flash_error'])): ?>
-        <p class="msg-erro"><?= $_SESSION['flash_error']; unset($_SESSION['flash_error']); ?></p>
+    <?php if (!empty($feedback)): ?>
+        <p class="msg-<?=$tipo?>"><?= $feedback ?></p>
     <?php endif; ?>
 </form>
 

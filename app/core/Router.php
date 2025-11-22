@@ -60,7 +60,7 @@ class Router
                 'controller' => 'UsuarioController',
                 'action' => 'atualizar'
             ],
-                '/api/perguntas' => [
+            '/api/perguntas' => [
                 'controller' => 'QuizController',
                 'action' => 'apiPerguntas'
             ],
@@ -103,7 +103,6 @@ class Router
             die("<h1>Erro: Controller '{$controllerName}' não encontrado.</h1>");
         }
 
-        require_once $controllerFile;
 
         if (!class_exists($controllerName)) {
             die("<h1>Erro: Classe '{$controllerName}' não declarada.</h1>");

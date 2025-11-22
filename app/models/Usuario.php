@@ -12,7 +12,8 @@ class Usuario
     }
 
 
-    public function findById($id){
+    public function findById($id)
+    {
         $query = "SELECT id, nome_usuario, email, pontos_totais, ranking
                   FROM  {$this->table}
                   WHERE id = :id
@@ -22,10 +23,10 @@ class Usuario
             $stmt = $this->conn->prepare($query);
             $stmt->execute([':id' => $id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
-        }catch(\PDOException $e){
+        } catch (\PDOException $e) {
             echo $e->getMessage();
             exit;
-        }          
+        }
     }
 
     public function criarUsuario($nome, $email, $senha)
@@ -36,7 +37,7 @@ class Usuario
         try {
             $stmt = $this->conn->prepare($query);
             $hashedPassword = password_hash($senha, PASSWORD_DEFAULT);
-            $token = TokenService::generate(); 
+            $token = TokenService::generate();
 
             $stmt->execute([
                 ':nome_usuario' => $nome,
@@ -69,8 +70,9 @@ class Usuario
         }
     }
 
-    public function atualizarNome($id, $nome){
-        
+    public function atualizarNome($id, $nome)
+    {
+
         $query = "UPDATE {$this->table} set nome_usuario = :nome
                   WHERE id = :id ";
 
@@ -92,7 +94,8 @@ class Usuario
         return $stmt->execute();
     }
 
-    public function atualizarPontuacao($id, $pontosGanhos){
+    public function atualizarPontuacao($id, $pontosGanhos)
+    {
 
         $query = "UPDATE {$this->table} 
                     SET pontos_totais = pontos_totais + :pontos
@@ -102,10 +105,10 @@ class Usuario
         $stmt->bindValue(":pontos", $pontosGanhos, PDO::PARAM_INT);
         $stmt->bindValue(":id", $id);
         $stmt->execute();
-                    
     }
 
-    public function topCinco(){
+    public function topCinco()
+    {
 
         $query = "SELECT nome_usuario, pontos_totais
                 FROM {$this->table} 
@@ -114,7 +117,6 @@ class Usuario
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);        
-
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

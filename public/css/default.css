@@ -1,13 +1,24 @@
+/* ============================================
+   ESTILOS GLOBAIS E LAYOUT DEFAULT
+============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 body {
     margin: 0;
     padding: 0;
     background-color: #CDFFDC;
-    /* Cor do body */
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 20px;
 }
 
 .container {
@@ -17,11 +28,12 @@ body {
     align-items: center;
     flex-wrap: wrap;
     background-color: #006400;
-    /* Cor do container */
     padding: 40px;
     border-radius: 12px;
-    width: 70%;
-    height: 70%;
+    width: 90%;
+    max-width: 900px;
+    height: auto;
+    min-height: 500px;
     text-align: center;
     color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -29,19 +41,24 @@ body {
 
 .container img {
     width: 100px;
+    max-width: 100%;
+    height: auto;
     margin-bottom: 20px;
 }
 
 .container input {
-    width: 70%;
+    width: 100%;
+    max-width: 400px;
     padding: 12px;
     margin: 8px 0;
     border: none;
     border-radius: 6px;
+    font-size: 16px;
 }
 
 .btn-enviar {
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     padding: 12px;
     background-color: #00a000;
     border: none;
@@ -50,16 +67,19 @@ body {
     margin-top: 10px;
     cursor: pointer;
     font-size: 16px;
+    transition: all 0.3s ease;
 }
 
 .btn-enviar:hover {
     background-color: #00c000;
+    transform: scale(1.02);
 }
 
 .container a {
     color: #CDFFDC;
     margin-top: 1rem;
     text-decoration: none;
+    font-size: 14px;
 }
 
 .container a:hover {
@@ -69,15 +89,29 @@ body {
 .foto {
     width: 200px;
     height: 200px;
+    max-width: 100%;
     background-color: #fff;
+    border-radius: 8px;
+}
+
+/* MENSAGENS GLOBAIS  */
+.msg-erro, .msg-sucesso {
+    padding: 12px;
+    margin: 0 0 15px 0;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    animation: fadeIn .3s ease-in-out;
 }
 
 .msg-erro {
-    background: #ff4b4b;
-    color: white;
-    padding: 10px;
-    width: 80%;
-    border-radius: 6px;
-    margin-bottom: 10px;
-    font-size: 14px;
+    background: #ff4d4d;
+    color: #fff;
+    border-left: 6px solid #b30000;
+}
+
+.msg-sucesso {
+    background: rgb(0, 81, 255);
+    color: #fff;
+    border-left: 6px solid #155724;
 }

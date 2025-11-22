@@ -78,3 +78,22 @@ body {
     margin-bottom: 10px;
     font-size: 14px;
 }
+
+/* ============================================
+   MEDIA QUERIES - RESPONSIVIDADE
+============================================ */
+
+/* Tablets e telas médias */
+@media (max-width: 850px) {
+    .container {
+        background-color: #006400; /* Cor do container */
+        padding: 10px;
+        border-radius: 12px;
+        width: 80%;
+        height: 80%;
+    }
+
+    form input {
+        width: 90%;
+    }
+}

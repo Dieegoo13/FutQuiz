@@ -1,9 +1,10 @@
 <div class="usuario-container">
-    
-    <?php if (!empty($erro)): ?>
-        <div class="msg-erro"><?= htmlspecialchars($erro) ?></div>
-    <?php endif; ?>
 
+    <?php if (!empty($feedback)): ?>
+        <div class="msg-<?= $tipo ?>">
+            <?= htmlspecialchars($feedback) ?>
+        </div>
+    <?php endif; ?>
 
     <div class="perfil">
         <img src="https://www.nicepng.com/png/detail/933-9332131_profile-picture-default-png.png" alt="Foto de perfil">
@@ -39,27 +40,23 @@
 
         <form action="/atualizar" method="POST">
 
-            <input type="text" 
-                name="nome" 
-                placeholder="Nome" 
-                value="<?= $usuario['nome_usuario'] ?? '' ?>" 
+            <input type="text"
+                name="nome"
+                placeholder="Nome"
+                value="<?= $usuario['nome_usuario'] ?? '' ?>"
                 required>
 
-            <input type="password" 
-                name="senha" 
+            <input type="password"
+                name="senha"
                 placeholder="Nova senha (deixe em branco se não quiser alterar)">
 
-            <input type="password" 
-                name="confirm" 
+            <input type="password"
+                name="confirm"
                 placeholder="Confirme a nova senha">
 
             <button type="submit" class="modal-close">Salvar</button>
         </form>
     </div>
 </div>
-
-
-
-
 
 <script src="/js/main.js"></script>

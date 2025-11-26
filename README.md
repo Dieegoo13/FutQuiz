@@ -32,12 +32,11 @@ O **FutQuiz** é um quiz interativo com perguntas relacionadas ao mundo do futeb
 
 Este projeto foi criado com o objetivo de praticar:
 
-- Estrutura **MVC simples**  
+- Estrutura **MVC **  
 - Back-end em **PHP nativo**  
 - Organização de rotas  
 - Separação entre **views**, **controllers** e **lógica**  
 - Integração com JavaScript na navegação  
-- **Hospedagem gratuita** no InfinityFree  
 
 Além disso, o site foi projetado para ser rápido, intuitivo e responsivo.
 
